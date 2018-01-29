@@ -26,4 +26,4 @@ getdisassemble_to_function('name_of_the_symbol','filename','/path/to/filename')
 
 
 Acknowledgements.
-Big thanks to Inbar Raz for the support and convincing me to share my simple parser, and to @shiftred and @iiamit for feedback.
+Big thanks to @inbarraz for the support and convincing me to share my simple parser, and to @shiftred and @iiamit for feedback.
