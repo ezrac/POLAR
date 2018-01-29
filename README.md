@@ -11,16 +11,16 @@ The flow is simple:
 
 
 Requirements:
-neo4j graph database - https://github.com/neo4j/neo4j
-neomodel - pip install neomodel
-r2pipe - pip install r2pipe
+- neo4j graph database - https://github.com/neo4j/neo4j
+- neomodel - pip install neomodel
+- r2pipe - pip install r2pipe
 
 
 Usage:
-To parse the imports/exports
-get_import_export_radare('filename','/path/to/filename')
-To decompile a function
-getdisassemble_to_function('name_of_the_symbol','filename','/path/to/filename')
+- To parse the imports/exports
+-- get_import_export_radare('filename','/path/to/filename')
+- To decompile a function
+-- getdisassemble_to_function('name_of_the_symbol','filename','/path/to/filename')
 
 
 
