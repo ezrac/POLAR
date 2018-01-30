@@ -13,7 +13,6 @@ for directory in directories:
 	for file in onlyfiles:
 	     get_import_export_radare(file,directory+file)```
 
-
 4) Identify which files are calling to system, using a cyperQL query:
 
 `MATCH p = (n:Symbol{name:'system'})-[r:uses]-() RETURN p`
