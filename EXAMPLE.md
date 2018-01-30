@@ -29,8 +29,8 @@ for directory in directories:
 ![Alt text](screenshots/Screenshot2.png?raw=true "Screenshot 2")
 7) Take a look at the decompile and profit :-)
 ![Alt text](screenshots/Screenshot3.png?raw=true "Screenshot 3")
-8) Or do complex queries, for example, whenever you have printf and system:
+8) Or do complex queries, for example, whenever you have sprintf and system:
 
-`MATCH p=(File{name:'httpd'})-[r:defines]->()<-[q:imports]-(Symbol{name:'printf'}) return p limit 100`
+`MATCH p=(File{name:'httpd'})-[r:defines]->()<-[q:imports]-(Symbol{name:'sprintf'}) return p limit 100`
 
 ![Alt text](screenshots/Screenshot4.png?raw=true "Screenshot 4")
