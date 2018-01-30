@@ -1,6 +1,6 @@
 # POLAR - Path Of LeAst Resistance - (Work in progress.....)
 
-##Introduction
+## Introduction
 While performing binary analysis of a firmware, I had a scenario where multiple executables were compiled against multiple libraries.
 I was looking for a graphical view to understand the relationships between imported and exported symbols and it's usages. 
 I didn't find anything that suits my needs. As such, I wrote a very simple parser, which can be useful for other people with the same needs.
@@ -10,13 +10,13 @@ The flow is simple:
 - If needed, decompile all the usages of a specific symbol, parse the calls and insert them to the graph.
 - python3
 
-##Requirements:
+## Requirements:
 - neo4j graph database - https://github.com/neo4j/neo4j
 - neomodel - pip install neomodel
 - r2pipe - pip install r2pipe
 
 
-##Usage:
+## Usage:
 - To parse the imports/exports
 -- get_import_export_radare('filename','/path/to/filename')
 - To decompile a function
@@ -25,15 +25,15 @@ The flow is simple:
 
 
 
-##Acknowledgements.
+## Acknowledgements.
 
 Big thanks to @inbarraz for the support and convincing me to share my simple parser, and to @shiftred and @iiamit for feedback.
 
 
 
-##Example usage
+## Example usage
 
-###Simple Command Injection Example
+### Simple Command Injection Example
 1) Download an old firmware version for a known vulnerable router, for example:
 https://www.netgear.com/support/product/R7000#Firmware%20Version%201.0.0.96%20(North%20America%20Only)
 2) Mount the squashfs image.
