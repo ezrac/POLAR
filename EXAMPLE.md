@@ -11,8 +11,8 @@ directories = ['/_R7000-V1.0.0.96_1.0.15.chk.extracted/squashfs-root/lib/' ,'/_R
 for directory in directories:
 	onlyfiles = [f for f in listdir(directory) if isfile(join(directory, f)) and not islink(join(directory, f))]
 	for file in onlyfiles:
-	     get_import_export_radare(file,directory+file)```
-
+	     get_import_export_radare(file,directory+file)
+```
 4) Identify which files are calling to system, using a cyperQL query:
 
 `MATCH p = (n:Symbol{name:'system'})-[r:uses]-() RETURN p`
