@@ -20,7 +20,7 @@ for directory in directories:
 ![Alt text](screenshots/Screenshot1.png?raw=true "Screenshot 1")
 5) Decompile all the calls to system from the file httpd (for example):
 
-`getdisassemble_to_function('system','acos_service','/_R7000-V1.0.0.96_1.0.15.chk.extracted/squashfs-root/usr/sbin/httpd')`
+`getdisassemble_to_function('system','httpd','/_R7000-V1.0.0.96_1.0.15.chk.extracted/squashfs-root/usr/sbin/httpd')`
 
 6) Make a cypherql query and expand the node:
 
