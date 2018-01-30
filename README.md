@@ -8,7 +8,7 @@ The flow is simple:
 - Using radare2, generate a list of imported exported symbols
 - Parse and insert them into a neo4j graph database.
 - If needed, decompile all the usages of a specific symbol, parse the calls and insert them to the graph.
-
+- python3
 
 Requirements:
 - neo4j graph database - https://github.com/neo4j/neo4j
