@@ -146,8 +146,8 @@ def disassemble_main(args=None):
                         dest="db_url",
                         default="bolt://neo4j:neo4j@localhost:7687")
 
-    parser.add_argument("-f", "--function-tuple",
-                        help="file:function tuple",
+    parser.add_argument("-f", "--function-tuples",
+                        help="file:function tuples",
                         required=True,
                         nargs='+')
     sys_args = vars(parser.parse_args(args=args))
