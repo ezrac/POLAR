@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'polar-parse = polar:parse_main',
+            'polar-disassemble = polar:disassemble_main',
         ]
     },
     install_requires=[

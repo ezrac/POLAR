@@ -127,5 +127,29 @@ def parse_main(args=None):
     parse(**sys_args)
 
 
-if __name__ == '__main__':
-    parse_main()
+def disassemble(db_url, function_tuples):
+    config.DATABASE_URL = db_url
+    for function_tuple in function_tuples:
+        function_name, file_path = function_tuple.rsplit(':', 1)
+        full_path = path.abspath(file_path)
+        getdisassemble_to_function(function_name, path.basename(full_path), full_path)
+
+
+def disassemble_main(args=None):
+    if args is None:
+        args = sys.argv[1:]
+
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s {ver}".format(ver=__version__))
+    parser.add_argument("-db", "--neo4j-database",
+                        help="neo4j database url",
+                        dest="db_url",
+                        default="bolt://neo4j:neo4j@localhost:7687")
+
+    parser.add_argument("-f", "--function-tuple",
+                        help="file:function tuple",
+                        required=True,
+                        nargs='+')
+    sys_args = vars(parser.parse_args(args=args))
+
+    disassemble(**sys_args)
