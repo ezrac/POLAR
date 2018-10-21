@@ -1,0 +1,2 @@
+r2pipe >= 0.9.9
+neomodel >= 3.2.8
