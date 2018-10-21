@@ -1,4 +1,3 @@
-<<<<<<< HEAD:polar/__init__.py
 import re
 import os
 import sys
@@ -39,7 +38,7 @@ class File(StructuredNode):
 class Function(StructuredNode):
     name = StringProperty(required=True)
     decompilation = StringProperty()
-    imports_symbol = RelationshipFrom('Symbol', 'imports')
+    imports_symbol = RelationshipTo('Symbol', 'imports')
     defined_at = RelationshipFrom('File', 'defines')
 
 
@@ -131,7 +130,7 @@ def parse_main(args=None):
 def disassemble(db_url, function_tuples):
     config.DATABASE_URL = db_url
     for function_tuple in function_tuples:
-        function_name, file_path = function_tuple.rsplit(':', 1)
+        file_path, function_name = function_tuple.rsplit(':', 1)
         full_path = path.abspath(file_path)
         getdisassemble_to_function(function_name, path.basename(full_path), full_path)
 
@@ -252,4 +251,3 @@ def getdisassemble_to_function(function_name, filename, path):
                     my_function.imports_symbol.connect(symbol)
                     my_function.defined_at.connect(filenode)
 
->>>>>>> master:parser.py
