@@ -32,7 +32,7 @@ class File(StructuredNode):
 class Function(StructuredNode):
     name = StringProperty(required=True)
     decompilation = StringProperty()
-    imports_symbol = RelationshipFrom('Symbol','imports')
+    imports_symbol = RelationshipTo('Symbol','imports')
     defined_at = RelationshipFrom('File','defines')
 
 
