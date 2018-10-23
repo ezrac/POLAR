@@ -104,7 +104,8 @@ def parse(db_url, directories):
         for dir_path, dir_names, file_names in os.walk(directory):
             for file_name in file_names:
                 full_path = path.abspath(path.join(dir_path, file_name))
-                get_import_export_radare(path.basename(full_path), full_path)
+                if os.path.islink(full_path) == False:
+                    get_import_export_radare(path.basename(full_path), full_path)
 
 
 def parse_main(args=None):
