@@ -25,6 +25,4 @@ Find network aware stuff
 MATCH (a:File)--(b:Symbol) WHERE b.name in ['accept', 'bind', 'listen', 'recv'] return a,b
 
 Experimental problematic fixed length buffers query
-MATCH (c:Function)<-[:defines]-(a:File{name:'httpd'})-->(b:Symbol), (c)-->(b2:Symbol) WHERE b.name =~ '.*memcpy.*' and not  b2.name  in ['strlen', 'len','min'] RETURN b,b2,c
-
-
+MATCH (b:Symbol)<--(c:Function)<-[:defines]-(a:File{name:'httpd'}), (c)-->(b2:Symbol) WHERE b.name =  'memcpy' and b2.name <> 'strlen'  RETURN c
