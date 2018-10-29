@@ -1,0 +1,30 @@
+Finding symbol usages
+
+MATCH (a:File)-->(b:Symbol) WHERE b.name in ['system', 'execve', 'popen'    ] RETURN a,b
+
+Dissasemble a function using the symbol 
+
+polar-disassemble -db "bolt://neo4j:ezra@localhost:7687" -f "usr/sbin/httpd:system"
+
+Finding usages on disassembled function
+MATCH (c:Function)-->(b:Symbol) WHERE b.name in ['system', 'execve', 'popen'    ]  return b,c
+
+Finding combination of function usages
+MATCH (c:Function)<-[:defines]-(a:File)-->(b:Symbol), (c)-->(b2:Symbol) WHERE b.name =~ '.*system.*' and b2.name =~ '.*print.*' RETURN b,b2,c
+
+Finding combination of function usages and a string (remember that in R2 %s gets translated as __s)
+MATCH (c:Function)<-[:defines]-(a:File)-->(b:Symbol), (c)-->(b2:Symbol) WHERE b.name =~ '.*system.*' and b2.name =~ '.*print.*'  and c.decompilation CONTAINS '__s' RETURN b,b2,c
+
+Finding banned functions
+MATCH (a:File)-->(b:Symbol) WHERE b.name in ['strcpy','strcpyA','strcpyW','wcscpy','_tcscpy','_mbscpy','StrCpy','StrCpyA','StrCpyW','lstrcpy','lstrcpyA','lstrcpyW','_tccpy','_mbccpy','_ftcscpy','strncpy','wcsncpy','_tcsncpy','_mbsncpy','_mbsnbcpy','StrCpyN','StrCpyNA','StrCpyNW','StrNCpy','strcpynA','StrNCpyA','StrNCpyW','lstrcpyn','lstrcpynA','lstrcpynW','strcat','strcatA','strcatW','wcscat','_tcscat','_mbscat','StrCat','StrCatA','StrCatW','lstrcat','lstrcatA','lstrcatW','StrCatBuff','StrCatBuffA','StrCatBuffW','StrCatChainW','_tccat','_mbccat','_ftcscat','strncat','wcsncat','_tcsncat','_mbsncat','_mbsnbcat','StrCatN','StrCatNA','StrCatNW','StrNCat','StrNCatA','StrNCatW','lstrncat','lstrcatnA','lstrcatnW','lstrcatn','sprintfW','sprintfA','wsprintf','wsprintfW','wsprintfA','sprintf','swprintf','_stprintf','wvsprintf','wvsprintfA','wvsprintfW','vsprintf','_vstprintf','vswprintf','_snwprintf','_snprintf','_sntprintf','nsprintf','wvsprintf','wvsprintfA','wvsprintfW','vsprintf','_vstprintf','vswprintf','strncpy','wcsncpy','_tcsncpy','_mbsncpy','_mbsnbcpy','StrCpyN','StrCpyNA','StrCpyNW','StrNCpy','strcpynA','StrNCpyA','StrNCpyW','lstrcpyn','lstrcpynA','lstrcpynW','_fstrncpy','strncat','wcsncat','_tcsncat','_mbsncat','_mbsnbcat','StrCatN','StrCatNA','StrCatNW','StrNCat','StrNCatA','StrNCatW','lstrncat','lstrcatnA','lstrcatnW','lstrcatn','_fstrncat','alloca','_alloca','strlen','wcslen','_mbslen','_mbstrlen','StrLen','lstrlen','memcpy','RtlCopyMemory','CopyMemory','wmemcpy']  RETURN a,b limit 1000
+
+Finding most used functions
+MATCH (a:File)-[r:uses]->(b:Symbol) RETURN b, count(r) as usages order by usages desc
+
+Find network aware stuff
+MATCH (a:File)--(b:Symbol) WHERE b.name in ['accept', 'bind', 'listen', 'recv'] return a,b
+
+Experimental problematic fixed length buffers query
+MATCH (c:Function)<-[:defines]-(a:File{name:'httpd'})-->(b:Symbol), (c)-->(b2:Symbol) WHERE b.name =~ '.*memcpy.*' and not  b2.name  in ['strlen', 'len','min'] RETURN b,b2,c
+
+
