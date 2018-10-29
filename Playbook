@@ -26,3 +26,7 @@ MATCH (a:File)--(b:Symbol) WHERE b.name in ['accept', 'bind', 'listen', 'recv'] 
 
 Experimental problematic fixed length buffers query
 MATCH (b:Symbol)<--(c:Function)<-[:defines]-(a:File{name:'httpd'}), (c)-->(b2:Symbol) WHERE b.name =  'memcpy' and b2.name <> 'strlen'  RETURN c
+
+Only returning line number 
+MATCH (b:Symbol)<--(c:Function)<-[:defines]-(a:File{name:'httpd'}), (c)-->(b2:Symbol) WHERE b.name =  'memcpy' and b2.name <> 'strlen' and c.name =~ 'sub.*' 
+WITH  [x in split(c.decompilation,'|')[0..-1] where x contains 'memcpy'] as n return n
